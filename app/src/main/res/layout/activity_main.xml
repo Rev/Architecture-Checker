@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#000000"
+    android:id="@+id/MainActivity"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/SloganText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/Polarmods"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:fontFamily="@font/montserrat_medium"/>
+
+    <TextView
+        android:id="@+id/AppVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:text="@string/credits"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:fontFamily="@font/montserrat_regular"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="150dp"
+        app:boxBackgroundColor="@color/dark3"
+        app:boxStrokeColor="@color/dark2"
+        app:boxStrokeWidth="2dp"
+        app:hintTextColor="@color/white"
+        app:hintAnimationEnabled="true"
+        android:hint="@string/package_">
+
+        <AutoCompleteTextView
+            android:id="@+id/AutoComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            tools:ignore="LabelFor" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</RelativeLayout>

@@ -1,0 +1,21 @@
+<resources>
+    <!-- Navigation Bar Secondary Colours Start (for "Tools", and "Extras")-->
+    <style name="NavigationView">
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+    <!-- Navigation Bar Secondary Colours End(for "Tools", and "Extras")-->
+
+    <!-- Action Bar Start-->
+    <style name="MyTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/dark1</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
+    <!-- Action Bar End-->
+</resources>
