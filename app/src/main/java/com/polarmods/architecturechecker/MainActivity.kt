@@ -32,11 +32,12 @@ class MainActivity : AppCompatActivity()
             val isSelectedItem : String = parent.getItemAtPosition(position).toString()
             val isPackageName: String = isSelectedItem
             val isPackageLibraryDir : String = packageManager.getApplicationInfo(isPackageName, 0).nativeLibraryDir
+            val isPackageLibraryDirValid = File(isPackageLibraryDir).isDirectory
 
             val isArchRegex = ("arm64|arm|x86|x86_64").toRegex()
             val isArchNative = isArchRegex.find(isPackageLibraryDir)
-            
-            if (isArchNative != null)
+
+            if (isArchNative != null && isPackageLibraryDirValid)
             {
                 Snackbar.make(findViewById(android.R.id.content), "$isPackageName = ${isArchNative.value}", Snackbar.LENGTH_LONG).setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE).setBackgroundTint(Color.parseColor("#343840")).setTextColor(Color.parseColor("#FFFFFF")).show()
             }
