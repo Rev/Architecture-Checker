@@ -9,6 +9,7 @@ import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import java.io.File
 
 class MainActivity : AppCompatActivity()
 {
@@ -24,43 +25,24 @@ class MainActivity : AppCompatActivity()
 
         isAutoCompleteTextView.setAdapter(isArrayAdapter)
 
-        isAutoCompleteTextView.onItemClickListener = OnItemClickListener { parent, view, position, id ->
+        isAutoCompleteTextView.onItemClickListener = OnItemClickListener { parent, _, position, id ->
 
             val isSelectedItem : String = parent.getItemAtPosition(position).toString()
             val isPackageName: String = isSelectedItem
             val isPackageLibraryDir : String = packageManager.getApplicationInfo(isPackageName, 0).nativeLibraryDir
+            val isPackageLibraryDirValid = File(isPackageLibraryDir).isDirectory
 
-            var isArchitectureFound = false
+            val isArchRegex = ("arm64|arm|x86|x86_64").toRegex()
+            val isArchNative = isArchRegex.find(isPackageLibraryDir)
 
-            if(isPackageLibraryDir.endsWith("arm64", false))
+            if (isArchNative != null && isPackageLibraryDirValid)
             {
-                Snackbar.make(findViewById(android.R.id.content), "$isPackageName = arm64", Snackbar.LENGTH_LONG).setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE).setBackgroundTint(Color.parseColor("#343840")).setTextColor(Color.parseColor("#FFFFFF")).show()
-                isArchitectureFound = true
+                Snackbar.make(findViewById(android.R.id.content), "$isPackageName = ${isArchNative.value}", Snackbar.LENGTH_LONG).setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE).setBackgroundTint(Color.parseColor("#343840")).setTextColor(Color.parseColor("#FFFFFF")).show()
             }
-
-            if(isPackageLibraryDir.endsWith("arm", false))
-            {
-                Snackbar.make(findViewById(android.R.id.content), "$isPackageName = arm", Snackbar.LENGTH_LONG).setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE).setBackgroundTint(Color.parseColor("#343840")).setTextColor(Color.parseColor("#FFFFFF")).show()
-                isArchitectureFound = true
-            }
-
-            if(isPackageLibraryDir.endsWith("x86", false))
-            {
-                Snackbar.make(findViewById(android.R.id.content), "$isPackageName = x86", Snackbar.LENGTH_LONG).setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE).setBackgroundTint(Color.parseColor("#343840")).setTextColor(Color.parseColor("#FFFFFF")).show()
-                isArchitectureFound = true
-            }
-
-            if(isPackageLibraryDir.endsWith("x86_64", false))
-            {
-                Snackbar.make(findViewById(android.R.id.content), "$isPackageName = x86_64", Snackbar.LENGTH_LONG).setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE).setBackgroundTint(Color.parseColor("#343840")).setTextColor(Color.parseColor("#FFFFFF")).show()
-                isArchitectureFound = true
-            }
-
-            if(!isArchitectureFound)
+            else
             {
                 Snackbar.make(findViewById(android.R.id.content), "$isPackageName = Undetermined", Snackbar.LENGTH_LONG).setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE).setBackgroundTint(Color.parseColor("#343840")).setTextColor(Color.parseColor("#FFFFFF")).show()
             }
-
         }
     }
 
