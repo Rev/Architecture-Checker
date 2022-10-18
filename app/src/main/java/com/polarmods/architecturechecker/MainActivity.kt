@@ -3,11 +3,9 @@ package com.polarmods.architecturechecker
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
